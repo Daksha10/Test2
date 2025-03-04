@@ -10,11 +10,15 @@
     <div class="container">
         <h1>LinkedIn Posts</h1>
         {% if error %}
-            <p class="error">Error fetching posts: {{ error }}</p>
+            <p class="error">Error: {{ error }}</p>
         {% endif %}
         <ul>
             {% for post in posts %}
-                <li class="post">{{ post }}</li>
+            <li class="post">
+                <p class="post-text">{{ post.get('text', 'No content available') }}</p>
+                <p><strong>Reactions:</strong> 👍 {{ post.get('likeCount', 0) }} | 💬 {{ post.get('commentsCount', 0) }} | 🔄 {{ post.get('repostsCount', 0) }}</p>
+                <a href="{{ post.get('postUrl', '#') }}" target="_blank">View Post</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
